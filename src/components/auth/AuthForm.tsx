@@ -10,8 +10,10 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useAuth } from '@/contexts/AuthContext';
 import { Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const AuthForm: React.FC = () => {
+  const { t } = useTranslation();
   const { signIn, signUp, loading } = useAuth();
   const [searchParams] = useSearchParams();
   const initialTab = searchParams.get('signup') ? 'signup' : 'login';
@@ -86,22 +88,22 @@ const AuthForm: React.FC = () => {
       
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'login' | 'signup')}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsTrigger value="login">{t('common.login')}</TabsTrigger>
+          <TabsTrigger value="signup">{t('common.signup')}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="login">
           <Card>
             <CardHeader>
-              <CardTitle>Login</CardTitle>
+              <CardTitle>{t('pages.login.signInButton')}</CardTitle>
               <CardDescription>
-                Sign in to your account to access the platform.
+                {t('pages.login.subtitle')}
               </CardDescription>
             </CardHeader>
             <form onSubmit={handleLogin}>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="login-email">Email</Label>
+                  <Label htmlFor="login-email">{t('pages.login.email')}</Label>
                   <Input 
                     id="login-email" 
                     type="email" 
@@ -112,7 +114,7 @@ const AuthForm: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="login-password">Password</Label>
+                  <Label htmlFor="login-password">{t('pages.login.password')}</Label>
                   <Input 
                     id="login-password" 
                     type="password" 
@@ -127,9 +129,9 @@ const AuthForm: React.FC = () => {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing In...
+                      {t('pages.login.signInButton')}...
                     </>
-                  ) : 'Sign In'}
+                  ) : t('pages.login.signInButton')}
                 </Button>
               </CardFooter>
             </form>
@@ -139,15 +141,15 @@ const AuthForm: React.FC = () => {
         <TabsContent value="signup">
           <Card>
             <CardHeader>
-              <CardTitle>Create an Account</CardTitle>
+              <CardTitle>{t('pages.login.signUpTitle')}</CardTitle>
               <CardDescription>
-                Sign up to start using TenderTrader.
+                {t('pages.login.signUpSubtitle')}
               </CardDescription>
             </CardHeader>
             <form onSubmit={handleSignup}>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name">Full Name</Label>
+                  <Label htmlFor="signup-name">{t('pages.login.fullName')}</Label>
                   <Input 
                     id="signup-name" 
                     type="text" 
@@ -158,7 +160,7 @@ const AuthForm: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email">{t('pages.login.email')}</Label>
                   <Input 
                     id="signup-email" 
                     type="email" 
@@ -169,7 +171,7 @@ const AuthForm: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password">{t('pages.login.password')}</Label>
                   <Input 
                     id="signup-password" 
                     type="password" 
@@ -178,10 +180,10 @@ const AuthForm: React.FC = () => {
                     required
                     minLength={6}
                   />
-                  <p className="text-xs text-muted-foreground">Password must be at least 6 characters</p>
+                  <p className="text-xs text-muted-foreground">{t('common.passwordLengthRequirement')}</p>
                 </div>
                 <div className="space-y-2">
-                  <Label>I am a:</Label>
+                  <Label>{t('common.iAmA')}:</Label>
                   <RadioGroup 
                     value={role} 
                     onValueChange={(value) => setRole(value as 'buyer' | 'seller')}
@@ -189,11 +191,11 @@ const AuthForm: React.FC = () => {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="buyer" id="buyer" />
-                      <Label htmlFor="buyer" className="cursor-pointer">Buyer</Label>
+                      <Label htmlFor="buyer" className="cursor-pointer">{t('common.buyer')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="seller" id="seller" />
-                      <Label htmlFor="seller" className="cursor-pointer">Supplier</Label>
+                      <Label htmlFor="seller" className="cursor-pointer">{t('common.seller')}</Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -203,9 +205,9 @@ const AuthForm: React.FC = () => {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating Account...
+                      {t('pages.login.signUpButton')}...
                     </>
-                  ) : 'Create Account'}
+                  ) : t('pages.login.signUpButton')}
                 </Button>
               </CardFooter>
             </form>

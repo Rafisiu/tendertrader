@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,60 +10,30 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
-// Define profile type based on our Supabase schema
 interface ProfileData {
-  id: string;
-  name: string;
-  location: string | null;
+  id: number;
   email: string;
-  role: string;
-  updated_at?: string;
+  name: string;
+  role: 'buyer' | 'seller';
+  created_at: string;
 }
 
 const Profile = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState<ProfileData | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
+    name: user?.name || '',
     location: '',
   });
 
   useEffect(() => {
     if (user) {
-      fetchProfile();
+      setFormData({
+        name: user.name || '',
+        location: '',
+      });
     }
   }, [user]);
-
-  const fetchProfile = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user?.id)
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        setProfile(data as ProfileData);
-        setFormData({
-          name: data.name || '',
-          location: data.location || '',
-        });
-      }
-    } catch (error: any) {
-      console.error('Error fetching profile:', error.message);
-      toast({
-        title: 'Error fetching profile',
-        description: error.message,
-        variant: 'destructive',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -76,28 +45,15 @@ const Profile = () => {
     try {
       setLoading(true);
       
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          name: formData.name,
-          location: formData.location,
-          updated_at: new Date().toISOString(),
-        } as any)
-        .eq('id', user?.id);
-
-      if (error) throw error;
-
-      // Update user_metadata in auth.users table
-      await supabase.auth.updateUser({
-        data: { name: formData.name }
-      });
-
+      // In this implementation, we're not actually updating the profile
+      // since we don't have a backend endpoint for profile updates yet
       toast({
-        title: 'Profile updated',
-        description: 'Your profile has been updated successfully.',
+        title: 'Profile update',
+        description: 'Profile updates are not yet implemented in this version.',
       });
       
-      fetchProfile(); // Refresh profile data
+      // In a full implementation, we would call an API endpoint here
+      // await apiClient.updateProfile({ ...formData });
     } catch (error: any) {
       console.error('Error updating profile:', error.message);
       toast({
@@ -179,7 +135,7 @@ const Profile = () => {
                   <Label htmlFor="role">Account Type</Label>
                   <Input 
                     id="role" 
-                    value={user.user_metadata?.role === 'buyer' ? 'Buyer' : 'Supplier'} 
+                    value={user.role === 'buyer' ? 'Buyer' : 'Supplier'} 
                     disabled 
                     className="bg-muted/50"
                   />

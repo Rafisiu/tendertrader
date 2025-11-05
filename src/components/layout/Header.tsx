@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import UserAvatar from '@/components/auth/UserAvatar';
+import LanguageToggle from './LanguageToggle';
+import { useTranslation } from '@/hooks/useTranslation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +26,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
@@ -31,14 +34,14 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-primary">TenderTrader</span>
+              <span className="text-xl font-bold text-primary">TDI VMS</span>
             </Link>
             
             <nav className="hidden md:flex items-center space-x-1">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center px-3 py-2 transition-colors">
-                    Categories <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" />
+                    {t('header.categoriesMenuText')} <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-56 animate-in fade-in-80 zoom-in-95">
@@ -58,19 +61,19 @@ const Header = () => {
                     <Link to="/categories/textiles" className="w-full">Textiles & Fibers</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="hover:bg-accent/20 transition-colors cursor-pointer">
-                    <Link to="/categories" className="w-full">All Categories</Link>
+                    <Link to="/categories" className="w-full">{t('common.allCategories')}</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               
               <Link to="/tenders" className="px-3 py-2 text-foreground/80 hover:text-foreground transition-colors">
-                Active Tenders
+                {t('common.opportunities')}
               </Link>
               <Link to="/suppliers" className="px-3 py-2 text-foreground/80 hover:text-foreground transition-colors">
-                Suppliers
+                {t('common.vendors')}
               </Link>
               <Link to="/about" className="px-3 py-2 text-foreground/80 hover:text-foreground transition-colors">
-                About Us
+                {t('common.about')}
               </Link>
             </nav>
           </div>
@@ -81,7 +84,7 @@ const Header = () => {
                 <div className="relative w-full max-w-xl md:w-[320px]">
                   <input
                     type="search"
-                    placeholder="Search tenders, suppliers, materials..."
+                    placeholder={t('common.searchPlaceholder')}
                     className="h-10 w-full rounded-md border border-input bg-background px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
                     autoFocus
                   />
@@ -103,26 +106,27 @@ const Header = () => {
             )}
             
             <div className="ml-auto flex items-center gap-2">
+              <LanguageToggle />
               {user ? (
                 <UserAvatar />
               ) : (
                 <>
                   <Button variant="ghost" onClick={() => navigate('/auth')}>
-                    Log In
+                    {t('common.login')}
                   </Button>
                   <Button onClick={() => navigate('/auth?signup')}>
-                    Sign Up
+                    {t('common.signup')}
                   </Button>
                 </>
               )}
             </div>
             
             <Link to="/buyer-portal" className="hidden md:flex">
-              <Button variant="outline" className="hover:bg-primary/10 transition-colors shadow-sm">Buyer Portal</Button>
+              <Button variant="outline" className="hover:bg-primary/10 transition-colors shadow-sm">{t('common.buyerPortal')}</Button>
             </Link>
             
             <Link to="/seller-portal" className="hidden md:flex">
-              <Button className="shadow-md hover:shadow-lg transition-all hover:translate-y-[-1px]">Seller Portal</Button>
+              <Button className="shadow-md hover:shadow-lg transition-all hover:translate-y-[-1px]">{t('common.sellerPortal')}</Button>
             </Link>
             
             <Button 
@@ -144,28 +148,28 @@ const Header = () => {
                 className="px-3 py-2 text-foreground hover:bg-muted rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Active Tenders
+                {t('common.opportunities')}
               </Link>
               <Link 
                 to="/suppliers" 
                 className="px-3 py-2 text-foreground hover:bg-muted rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Suppliers
+                {t('common.vendors')}
               </Link>
               <Link 
                 to="/categories" 
                 className="px-3 py-2 text-foreground hover:bg-muted rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Categories
+                {t('common.categories')}
               </Link>
               <Link 
                 to="/about" 
                 className="px-3 py-2 text-foreground hover:bg-muted rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                About Us
+                {t('common.about')}
               </Link>
               <div className="pt-2 space-y-2">
                 <Link 
@@ -175,7 +179,7 @@ const Header = () => {
                 >
                   <Button variant="outline" className="w-full gap-2">
                     <LogIn className="h-4 w-4" />
-                    Log In
+                    {t('common.login')}
                   </Button>
                 </Link>
                 <div className="grid grid-cols-2 gap-2">
@@ -184,14 +188,14 @@ const Header = () => {
                     className="block"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Button variant="outline" className="w-full">Buyer Portal</Button>
+                    <Button variant="outline" className="w-full">{t('common.buyerPortal')}</Button>
                   </Link>
                   <Link 
                     to="/seller-portal" 
                     className="block"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Button className="w-full">Seller Portal</Button>
+                    <Button className="w-full">{t('common.sellerPortal')}</Button>
                   </Link>
                 </div>
               </div>

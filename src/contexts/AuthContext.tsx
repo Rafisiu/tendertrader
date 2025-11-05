@@ -1,12 +1,19 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
+import { apiClient } from '@/lib/api';
 import { toast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '@/hooks/useTranslation';
+
+// Define the User type
+interface User {
+  id: number;
+  email: string;
+  name: string;
+  role: 'buyer' | 'seller';
+}
 
 type AuthContextType = {
-  session: Session | null;
   user: User | null;
   signUp: (email: string, password: string, userData: { 
     name: string;
@@ -20,44 +27,29 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    // Set up the auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, currentSession) => {
-        console.log('Auth state changed:', event);
-        setSession(currentSession);
-        setUser(currentSession?.user ?? null);
-        
-        if (event === 'SIGNED_IN') {
-          toast({
-            title: 'Signed in successfully',
-            description: 'Welcome to TenderTrader!',
-          });
-        } else if (event === 'SIGNED_OUT') {
-          toast({
-            title: 'Signed out',
-            description: 'You have been signed out.',
-          });
-        }
+    // Initialize the API client with any stored token
+    apiClient.initializeToken();
+    
+    // Try to get user profile to verify token is still valid
+    const verifyStoredSession = async () => {
+      try {
+        const profile = await apiClient.getProfile();
+        setUser(profile.user);
+      } catch (error) {
+        // Token is invalid or expired, clear it
+        apiClient.clearToken();
+      } finally {
+        setLoading(false);
       }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
-      console.log('Retrieved session:', currentSession ? 'exists' : 'none');
-      setSession(currentSession);
-      setUser(currentSession?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
     };
+    
+    verifyStoredSession();
   }, []);
 
   const signUp = async (
@@ -69,28 +61,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(true);
       console.log('Signing up with:', { email, userData });
       
-      const { error, data } = await supabase.auth.signUp({
+      const response = await apiClient.register({
         email,
         password,
-        options: {
-          data: {
-            name: userData.name,
-            role: userData.role,
-          },
-        },
+        name: userData.name,
+        role: userData.role,
       });
-
-      if (error) throw error;
       
-      console.log('Sign up response:', data);
+      setUser(response.user as User);
       
       toast({
-        title: 'Account created!',
-        description: 'Please check your email to confirm your account.',
+        title: t('auth.accountCreated'),
+        description: t('auth.welcomeMessage'),
       });
       
-      // For development, we can navigate to the homepage directly
-      // since email confirmation may be disabled in Supabase
       navigate('/');
     } catch (error: any) {
       console.error('Error signing up:', error.message);
@@ -105,14 +89,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(true);
       console.log('Signing in with:', email);
       
-      const { error, data } = await supabase.auth.signInWithPassword({
+      const response = await apiClient.login({
         email,
         password,
       });
-
-      if (error) throw error;
       
-      console.log('Sign in response:', data);
+      setUser(response.user as User);
+      
+      toast({
+        title: t('auth.signedInSuccessfully'),
+        description: t('auth.welcomeMessage'),
+      });
+      
       navigate('/');
     } catch (error: any) {
       console.error('Error signing in:', error.message);
@@ -125,12 +113,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signOut = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      await apiClient.logout();
+      setUser(null);
       navigate('/auth');
+      
+      toast({
+        title: t('auth.signedOut'),
+        description: t('auth.signedOutDescription'),
+      });
     } catch (error: any) {
       toast({
-        title: 'Error signing out',
+        title: t('auth.errorSigningOut'),
         description: error.message,
         variant: 'destructive',
       });
@@ -141,7 +134,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ session, user, signUp, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{ user, signUp, signIn, signOut, loading }}>
       {children}
     </AuthContext.Provider>
   );

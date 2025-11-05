@@ -6,8 +6,11 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2, Users, Globe, ShieldCheck, BarChart3, Search } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -17,9 +20,9 @@ const About = () => {
         <section className="bg-business-800 text-white py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl font-bold mb-6">About TenderTrader</h1>
+              <h1 className="text-4xl font-bold mb-6">{t('pages.about.title')}</h1>
               <p className="text-xl mb-8 text-business-100">
-                The leading B2B platform connecting buyers and suppliers in the global raw materials market.
+                {t('pages.about.subtitle')}
               </p>
             </div>
           </div>
@@ -30,20 +33,20 @@ const About = () => {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+                <h2 className="text-3xl font-bold mb-6">{t('pages.about.missionTitle')}</h2>
                 <p className="text-lg mb-6 text-muted-foreground">
-                  TenderTrader was founded with a simple mission: to create a transparent, efficient, and reliable marketplace for raw materials procurement.
+                  {t('pages.about.missionText')}
                 </p>
                 <p className="text-lg mb-6 text-muted-foreground">
-                  We believe that by connecting buyers directly with verified suppliers, implementing rigorous quality controls, and leveraging technology, we can revolutionize how businesses source raw materials.
+                  {t('pages.about.overviewText')}
                 </p>
                 <p className="text-lg text-muted-foreground">
-                  Our platform helps businesses of all sizes reduce procurement costs, minimize supply chain risks, and find reliable partners for long-term growth.
+                  {t('pages.about.overviewText')}
                 </p>
               </div>
               
               <div className="bg-muted/20 p-8 rounded-lg">
-                <h3 className="text-xl font-bold mb-6">Why Choose TenderTrader?</h3>
+                <h3 className="text-xl font-bold mb-6">{t('pages.about.whyChooseTitle')}</h3>
                 
                 <div className="space-y-4">
                   <div className="flex items-start">
@@ -51,8 +54,8 @@ const About = () => {
                       <CheckCircle2 className="h-5 w-5 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Quality Assurance</h4>
-                      <p className="text-muted-foreground">All suppliers and materials undergo thorough verification and quality audits.</p>
+                      <h4 className="font-semibold mb-1">{t('pages.about.feature1Title')}</h4>
+                      <p className="text-muted-foreground">{t('pages.about.feature1Desc')}</p>
                     </div>
                   </div>
                   
@@ -61,8 +64,8 @@ const About = () => {
                       <Globe className="h-5 w-5 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Global Reach</h4>
-                      <p className="text-muted-foreground">Connect with suppliers and buyers from around the world in one platform.</p>
+                      <h4 className="font-semibold mb-1">{t('pages.about.feature2Title')}</h4>
+                      <p className="text-muted-foreground">{t('pages.about.feature2Desc')}</p>
                     </div>
                   </div>
                   
@@ -71,8 +74,8 @@ const About = () => {
                       <ShieldCheck className="h-5 w-5 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Secure Transactions</h4>
-                      <p className="text-muted-foreground">Protected payment systems and contractual safeguards for all parties.</p>
+                      <h4 className="font-semibold mb-1">{t('pages.about.feature3Title')}</h4>
+                      <p className="text-muted-foreground">{t('pages.about.feature3Desc')}</p>
                     </div>
                   </div>
                   
@@ -81,8 +84,8 @@ const About = () => {
                       <BarChart3 className="h-5 w-5 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Data-Driven Insights</h4>
-                      <p className="text-muted-foreground">Market analytics and pricing trends to inform better procurement decisions.</p>
+                      <h4 className="font-semibold mb-1">{t('pages.about.feature4Title')}</h4>
+                      <p className="text-muted-foreground">{t('pages.about.feature4Desc')}</p>
                     </div>
                   </div>
                 </div>
@@ -95,9 +98,9 @@ const About = () => {
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Key Platform Features</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('pages.about.approachTitle')}</h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                TenderTrader combines powerful tools and features to create the most effective raw materials procurement platform.
+                {t('pages.about.approachText')}
               </p>
             </div>
             
@@ -107,9 +110,9 @@ const About = () => {
                   <div className="bg-business-100 rounded-full p-3 w-14 h-14 flex items-center justify-center mb-4">
                     <Search className="h-6 w-6 text-business-800" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3">Tender Marketplace</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('common.tenderMarketplace')}</h3>
                   <p className="text-muted-foreground">
-                    Post detailed tender requests specifying exact material requirements, quantities, and quality standards. Receive competitive bids from verified suppliers.
+                    {t('common.tenderMarketplaceDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -119,9 +122,9 @@ const About = () => {
                   <div className="bg-business-100 rounded-full p-3 w-14 h-14 flex items-center justify-center mb-4">
                     <CheckCircle2 className="h-6 w-6 text-business-800" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3">Quality Audits</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('common.qualityAudits')}</h3>
                   <p className="text-muted-foreground">
-                    Professional third-party quality audits ensure materials meet specified standards before shipment, with detailed reports and certifications.
+                    {t('common.qualityAuditsDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -131,9 +134,9 @@ const About = () => {
                   <div className="bg-business-100 rounded-full p-3 w-14 h-14 flex items-center justify-center mb-4">
                     <Users className="h-6 w-6 text-business-800" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3">Supplier Verification</h3>
+                  <h3 className="text-xl font-bold mb-3">{t('common.supplierVerification')}</h3>
                   <p className="text-muted-foreground">
-                    All suppliers undergo thorough verification of business credentials, production capabilities, and quality management systems.
+                    {t('common.supplierVerificationDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -145,9 +148,9 @@ const About = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Our Leadership Team</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('pages.about.teamTitle')}</h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Meet the experienced professionals leading TenderTrader's mission to transform raw materials procurement.
+                {t('pages.about.teamText')}
               </p>
             </div>
             
@@ -156,9 +159,9 @@ const About = () => {
                 <div key={i} className="text-center">
                   <div className="bg-muted w-32 h-32 rounded-full mx-auto mb-4"></div>
                   <h3 className="text-xl font-bold">Executive Name</h3>
-                  <p className="text-muted-foreground mb-3">Position/Title</p>
+                  <p className="text-muted-foreground mb-3">{t('common.positionTitle')}</p>
                   <p className="text-sm text-muted-foreground">
-                    Brief bio with experience in industry, previous roles, and expertise.
+                    {t('common.briefBio')}
                   </p>
                 </div>
               ))}
@@ -170,19 +173,19 @@ const About = () => {
         <section className="py-16 bg-business-800 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Procurement Process?</h2>
+              <h2 className="text-3xl font-bold mb-6">{t('pages.about.trustTitle')}</h2>
               <p className="text-business-100 mb-8">
-                Join thousands of businesses that trust TenderTrader for their raw material needs.
+                {t('pages.about.trustText')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/buyer">
                   <Button size="lg" className="bg-accent hover:bg-accent-600 text-white w-full sm:w-auto">
-                    Start as Buyer
+                    {t('common.startAsBuyer')}
                   </Button>
                 </Link>
                 <Link to="/seller">
                   <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-business-700 w-full sm:w-auto">
-                    Start as Supplier
+                    {t('common.startAsSupplier')}
                   </Button>
                 </Link>
               </div>

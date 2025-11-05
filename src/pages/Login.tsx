@@ -8,8 +8,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Checkbox } from '@/components/ui/checkbox';
 import { LogIn, User, Mail, Lock, Eye, EyeOff, ArrowRight, Github, Twitter } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,26 +32,26 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-b from-background to-muted/30">
       <div className="animate-fade-in w-full max-w-md">
         <Link to="/" className="flex justify-center mb-8">
-          <span className="text-2xl font-bold text-primary">TenderTrader</span>
+          <span className="text-2xl font-bold text-primary">TDI VMS</span>
         </Link>
         
         <Card className="shadow-lg border-t-4 border-t-accent">
           <Tabs defaultValue="login">
             <TabsList className="w-full grid grid-cols-2">
-              <TabsTrigger value="login" className="data-[state=active]:bg-accent/10 rounded-none">Login</TabsTrigger>
-              <TabsTrigger value="signup" className="data-[state=active]:bg-accent/10 rounded-none">Sign Up</TabsTrigger>
+              <TabsTrigger value="login" className="data-[state=active]:bg-accent/10 rounded-none">{t('common.login')}</TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-accent/10 rounded-none">{t('common.signup')}</TabsTrigger>
             </TabsList>
             
             <TabsContent value="login">
               <CardHeader>
-                <CardTitle>Welcome back</CardTitle>
-                <CardDescription>Enter your credentials to access your account</CardDescription>
+                <CardTitle>{t('pages.login.title')}</CardTitle>
+                <CardDescription>{t('pages.login.subtitle')}</CardDescription>
               </CardHeader>
               
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('pages.login.email')}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input 
@@ -66,9 +68,9 @@ const Login = () => {
                   
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <Label htmlFor="password">Password</Label>
+                      <Label htmlFor="password">{t('pages.login.password')}</Label>
                       <Link to="/forgot-password" className="text-xs text-accent hover:underline">
-                        Forgot password?
+                        {t('pages.login.forgotPassword')}
                       </Link>
                     </div>
                     <div className="relative">
@@ -94,12 +96,12 @@ const Login = () => {
                   
                   <div className="flex items-center space-x-2">
                     <Checkbox id="remember" />
-                    <Label htmlFor="remember" className="text-sm">Remember me for 30 days</Label>
+                    <Label htmlFor="remember" className="text-sm">{t('pages.login.rememberMe')}</Label>
                   </div>
                   
                   <Button type="submit" className="w-full shadow-md hover:shadow-lg">
                     <LogIn className="h-4 w-4 mr-2" />
-                    Login
+                    {t('pages.login.signInButton')}
                   </Button>
                 </form>
                 
@@ -108,7 +110,7 @@ const Login = () => {
                     <div className="w-full border-t border-border"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    <span className="bg-card px-2 text-muted-foreground">{t('common.continueWith')}</span>
                   </div>
                 </div>
                 
@@ -127,14 +129,14 @@ const Login = () => {
             
             <TabsContent value="signup">
               <CardHeader>
-                <CardTitle>Create an account</CardTitle>
-                <CardDescription>Enter your details to register</CardDescription>
+                <CardTitle>{t('pages.login.signUpTitle')}</CardTitle>
+                <CardDescription>{t('pages.login.signUpSubtitle')}</CardDescription>
               </CardHeader>
               
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Label htmlFor="signup-name">{t('pages.login.fullName')}</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input 
@@ -147,7 +149,7 @@ const Login = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email">{t('pages.login.email')}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input 
@@ -163,7 +165,7 @@ const Login = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password">{t('pages.login.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input 
@@ -189,14 +191,14 @@ const Login = () => {
                     <div className="flex items-center space-x-2">
                       <Checkbox id="terms" required />
                       <Label htmlFor="terms" className="text-sm">
-                        I agree to the <Link to="/terms" className="text-accent hover:underline">Terms of Service</Link> and <Link to="/privacy" className="text-accent hover:underline">Privacy Policy</Link>
+                        {t('common.agreeToTerms')} <Link to="/terms" className="text-accent hover:underline">{t('common.termsOfService')}</Link> {t('common.and')} <Link to="/privacy" className="text-accent hover:underline">{t('common.privacyPolicy')}</Link>
                       </Label>
                     </div>
                   </div>
                   
                   <Button type="submit" variant="accent" className="w-full shadow-md hover:shadow-lg">
                     <ArrowRight className="h-4 w-4 mr-2" />
-                    Create Account
+                    {t('pages.login.signUpButton')}
                   </Button>
                 </form>
                 
@@ -205,7 +207,7 @@ const Login = () => {
                     <div className="w-full border-t border-border"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    <span className="bg-card px-2 text-muted-foreground">{t('common.continueWith')}</span>
                   </div>
                 </div>
                 
@@ -225,7 +227,7 @@ const Login = () => {
           
           <CardFooter className="flex justify-center p-6 border-t">
             <p className="text-center text-sm text-muted-foreground">
-              By continuing, you acknowledge that you have read and understood our <Link to="/terms" className="text-accent hover:underline">Terms of Service</Link> and <Link to="/privacy" className="text-accent hover:underline">Privacy Policy</Link>
+              {t('common.byContinuing')} <Link to="/terms" className="text-accent hover:underline">{t('common.termsOfService')}</Link> {t('common.and')} <Link to="/privacy" className="text-accent hover:underline">{t('common.privacyPolicy')}</Link>
             </p>
           </CardFooter>
         </Card>

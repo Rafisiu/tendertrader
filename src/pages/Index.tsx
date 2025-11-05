@@ -21,6 +21,7 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from '@/hooks/useTranslation';
 
 // Register ScrollTrigger with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -58,6 +59,7 @@ const BackgroundCircle = ({ className }) => {
 };
 
 const Index = () => {
+  const { t } = useTranslation();
   const heroRef = useRef(null);
   const statsRef = useRef(null);
   const featuresRef = useRef(null);
@@ -238,12 +240,11 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <AnimatedSection className="text-center mb-16">
               <Badge variant="outline" className="mb-4 px-3 py-1 bg-accent/10 text-accent border-accent/20">
-                Platform Benefits
+                {t('pages.index.featureTitle')}
               </Badge>
-              <h2 className="text-3xl font-bold mb-4">Why Choose TenderTrader?</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('pages.index.whyChooseTitle')}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our platform streamlines the procurement process for raw materials,
-                connecting buyers with verified suppliers in a transparent marketplace.
+                {t('pages.index.whyChooseSubtitle')}
               </p>
             </AnimatedSection>
             
@@ -253,9 +254,9 @@ const Index = () => {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Shield className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Verified Suppliers</h3>
+                  <h3 className="text-xl font-semibold mb-2">{t('pages.index.verifiedSuppliersTitle')}</h3>
                   <p className="text-muted-foreground">
-                    All suppliers undergo thorough verification to ensure reliability and quality standards.
+                    {t('pages.index.verifiedSuppliersDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -265,9 +266,9 @@ const Index = () => {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <TrendingUp className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Transparent Bidding</h3>
+                  <h3 className="text-xl font-semibold mb-2">{t('pages.index.transparentBiddingTitle')}</h3>
                   <p className="text-muted-foreground">
-                    Clear bidding processes with fair competition and comparable offers in one place.
+                    {t('pages.index.transparentBiddingDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -277,9 +278,9 @@ const Index = () => {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Search className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Quality Audits</h3>
+                  <h3 className="text-xl font-semibold mb-2">{t('pages.index.qualityAssuranceTitle')}</h3>
                   <p className="text-muted-foreground">
-                    Optional third-party quality inspection services to ensure materials meet specifications.
+                    {t('pages.index.qualityAssuranceDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -391,20 +392,20 @@ const Index = () => {
         <section className="py-20 bg-gradient-to-r from-business-800 to-business-900 text-white" ref={ctaRef}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Procurement?</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('pages.index.getStartedTitle')}</h2>
               <p className="text-business-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of businesses already streamlining their raw materials procurement on our platform.
+                {t('pages.index.getStartedSubtitle')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/buyer">
                   <Button size="lg" variant="accent" className="w-full sm:w-auto">
-                    Get Started as Buyer
+                    {t('pages.index.getStartedBuyer')}
                   </Button>
                 </Link>
                 <Link to="/seller">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent border-white text-white hover:bg-white/10">
-                    Register as Supplier
+                    {t('pages.index.getStartedSeller')}
                   </Button>
                 </Link>
               </div>

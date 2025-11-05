@@ -1,8 +1,8 @@
-# TenderTrader
+# TDI VMS
 
-**The Leading B2B Marketplace for Raw Material Tenders and Procurement**
+**TDI Vendor Management System**
 
-TenderTrader is a modern, scalable, and efficient web platform built to revolutionize the way businesses source and supply raw materials. Designed for both buyers and suppliers, it streamlines procurement workflows, connects verified partners, and enables transparent tendering—all in one intuitive platform.
+TDI VMS is a modern, scalable, and efficient web platform built to revolutionize the way businesses source and supply raw materials. Designed for both buyers and suppliers, it streamlines procurement workflows, connects verified partners, and enables transparent vendor bidding—all in one intuitive platform.
 
 ---
 
@@ -18,10 +18,10 @@ TenderTrader is a modern, scalable, and efficient web platform built to revoluti
 
 ## Overview
 
-TenderTrader simplifies the complex procurement process by offering a single, transparent platform where businesses can:
+TDI VMS simplifies the complex procurement process by offering a single, transparent platform where businesses can:
 
-- Post and manage tenders
-- Connect with verified suppliers
+- Post and manage procurement opportunities
+- Connect with verified vendors
 - Track and analyze procurement activity
 - Negotiate securely within a trusted ecosystem
 
@@ -31,12 +31,12 @@ TenderTrader simplifies the complex procurement process by offering a single, tr
 
 ### Platform Benefits
 
-- **Verified Suppliers** – Thorough background checks ensure quality and reliability.
+- **Verified Vendors** – Thorough background checks ensure quality and reliability.
 - **Transparent Bidding** – Fair competition with comparable offers in one place.
 - **Quality Audits** – Optional third-party material inspections.
 - **Market Analytics** – Access to real-time trends, indices, and analytics.
 - **Global Network** – Cross-border procurement with businesses from 35+ countries.
-- **Streamlined Procurement** – One platform to manage tenders, offers, and trades.
+- **Streamlined Procurement** – One platform to manage opportunities, bids, and trades.
 
 ---
 
@@ -44,15 +44,15 @@ TenderTrader simplifies the complex procurement process by offering a single, tr
 
 Getting started is simple:
 
-1. **Create Your Account** – Register as a buyer or supplier and complete your profile.
-2. **Post or Browse** – Create tenders or explore listings based on your needs.
+1. **Create Your Account** – Register as a buyer or vendor and complete your profile.
+2. **Post or Browse** – Create opportunities or explore listings based on your needs.
 3. **Connect & Trade** – Communicate, negotiate, and complete deals securely.
 
 ---
 
-## Why Choose TenderTrader?
+## Why Choose TDI VMS?
 
-TenderTrader isn't just a marketplace—it’s a full-service procurement solution that puts speed, security, and trust first.
+TDI VMS isn't just a marketplace—it’s a full-service procurement solution that puts speed, security, and trust first.
 
 - Fast Onboarding – Get started in minutes
 - Global Access – Connect with partners worldwide
@@ -87,12 +87,12 @@ Follow these steps to set up and run the project locally:
 
 ### Step 1: Clone the repository using the project's Git URL
 ```bash
-git clone https://github.com/NilayShenai/tendertrader.git
+git clone https://github.com/NilayShenai/tdi-vms.git
 ```
 
 ### Step 2: Navigate to the project directory
 ```bash
-cd tendertrader
+cd tdi-vms
 ```
 
 ### Step 3: Install the necessary dependencies
