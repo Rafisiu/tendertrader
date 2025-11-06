@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import MitraKerjaTable from '../tables/MitraKerjaTable';
 
 interface MitraKerjaStepProps {
   data: WizardData;
@@ -8,6 +8,23 @@ interface MitraKerjaStepProps {
 }
 
 const MitraKerjaStep: React.FC<MitraKerjaStepProps> = ({ data, setData }) => {
+
+  // Handler functions for Mitra Kerja
+  const handleEditMitraKerja = (id: number) => {
+    console.log('Edit mitra kerja dengan ID:', id);
+  };
+
+  const handleDeleteMitraKerja = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      mitraKerjaData: prev.mitraKerjaData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddMitraKerja = () => {
+    console.log('Add new mitra kerja');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -19,20 +36,15 @@ const MitraKerjaStep: React.FC<MitraKerjaStepProps> = ({ data, setData }) => {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Mitra Kerja & Partnership</CardTitle>
-          <CardDescription>
-            Tambahkan informasi mitra kerja dan kerjasama strategis
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Mitra Kerja - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk mitra kerja akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        {/* Mitra Kerja Table */}
+        <MitraKerjaTable
+          data={data.mitraKerjaData}
+          onEdit={handleEditMitraKerja}
+          onDelete={handleDeleteMitraKerja}
+          onAdd={handleAddMitraKerja}
+        />
+      </div>
     </div>
   );
 };

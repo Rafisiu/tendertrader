@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import LaporanKeuanganTable from '../tables/LaporanKeuanganTable';
 
 interface LaporanKeuanganStepProps {
   data: WizardData;
@@ -8,6 +8,23 @@ interface LaporanKeuanganStepProps {
 }
 
 const LaporanKeuanganStep: React.FC<LaporanKeuanganStepProps> = ({ data, setData }) => {
+
+  // Handler functions for Laporan Keuangan
+  const handleEditLaporanKeuangan = (id: number) => {
+    console.log('Edit laporan keuangan dengan ID:', id);
+  };
+
+  const handleDeleteLaporanKeuangan = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      laporanKeuanganData: prev.laporanKeuanganData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddLaporanKeuangan = () => {
+    console.log('Add new laporan keuangan');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -15,24 +32,19 @@ const LaporanKeuanganStep: React.FC<LaporanKeuanganStepProps> = ({ data, setData
           Data Laporan Keuangan
         </h2>
         <p className="text-gray-600">
-          Upload dan kelola laporan keuangan perusahaan
+          Kelola laporan keuangan dan data finansial perusahaan
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Laporan Keuangan</CardTitle>
-          <CardDescription>
-            Upload laporan keuangan tahunan dan dokumen finansial lainnya
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Laporan Keuangan - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk laporan keuangan akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        {/* Laporan Keuangan Table */}
+        <LaporanKeuanganTable
+          data={data.laporanKeuanganData}
+          onEdit={handleEditLaporanKeuangan}
+          onDelete={handleDeleteLaporanKeuangan}
+          onAdd={handleAddLaporanKeuangan}
+        />
+      </div>
     </div>
   );
 };

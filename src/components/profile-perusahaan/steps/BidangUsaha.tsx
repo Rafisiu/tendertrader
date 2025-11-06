@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import BidangUsahaTable from '../tables/BidangUsahaTable';
 
 interface BidangUsahaStepProps {
   data: WizardData;
@@ -8,6 +9,22 @@ interface BidangUsahaStepProps {
 }
 
 const BidangUsahaStep: React.FC<BidangUsahaStepProps> = ({ data, setData }) => {
+
+  const handleEditBidangUsaha = (id: number) => {
+    console.log('Edit bidang usaha dengan ID:', id);
+  };
+
+  const handleDeleteBidangUsaha = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      bidangUsahaData: prev.bidangUsahaData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddBidangUsaha = () => {
+    console.log('Add new bidang usaha');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -19,20 +36,14 @@ const BidangUsahaStep: React.FC<BidangUsahaStepProps> = ({ data, setData }) => {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Bidang Usaha Perusahaan</CardTitle>
-          <CardDescription>
-            Pilih bidang usaha dan kategori produk yang sesuai dengan perusahaan
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Bidang Usaha - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk bidang usaha akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        <BidangUsahaTable
+          data={data.bidangUsahaData}
+          onEdit={handleEditBidangUsaha}
+          onDelete={handleDeleteBidangUsaha}
+          onAdd={handleAddBidangUsaha}
+        />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import PengalamanTable from '../tables/PengalamanTable';
 
 interface PengalamanStepProps {
   data: WizardData;
@@ -8,6 +8,23 @@ interface PengalamanStepProps {
 }
 
 const PengalamanStep: React.FC<PengalamanStepProps> = ({ data, setData }) => {
+
+  // Handler functions for Pengalaman
+  const handleEditPengalaman = (id: number) => {
+    console.log('Edit pengalaman dengan ID:', id);
+  };
+
+  const handleDeletePengalaman = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      pengalamanData: prev.pengalamanData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddPengalaman = () => {
+    console.log('Add new pengalaman');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -19,20 +36,15 @@ const PengalamanStep: React.FC<PengalamanStepProps> = ({ data, setData }) => {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Pengalaman Perusahaan</CardTitle>
-          <CardDescription>
-            Tambahkan riwayat proyek dan pengalaman kerja perusahaan
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Pengalaman - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk pengalaman akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        {/* Pengalaman Table */}
+        <PengalamanTable
+          data={data.pengalamanData}
+          onEdit={handleEditPengalaman}
+          onDelete={handleDeletePengalaman}
+          onAdd={handleAddPengalaman}
+        />
+      </div>
     </div>
   );
 };

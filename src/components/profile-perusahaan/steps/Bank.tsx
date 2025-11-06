@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import BankTable from '../tables/BankTable';
 
 interface BankStepProps {
   data: WizardData;
@@ -8,6 +9,22 @@ interface BankStepProps {
 }
 
 const BankStep: React.FC<BankStepProps> = ({ data, setData }) => {
+
+  const handleEditBank = (id: number) => {
+    console.log('Edit bank dengan ID:', id);
+  };
+
+  const handleDeleteBank = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      bankData: prev.bankData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddBank = () => {
+    console.log('Add new bank');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -19,20 +36,14 @@ const BankStep: React.FC<BankStepProps> = ({ data, setData }) => {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Informasi Bank</CardTitle>
-          <CardDescription>
-            Tambahkan rekening bank untuk transaksi perusahaan
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Bank - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk informasi bank akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        <BankTable
+          data={data.bankData}
+          onEdit={handleEditBank}
+          onDelete={handleDeleteBank}
+          onAdd={handleAddBank}
+        />
+      </div>
     </div>
   );
 };

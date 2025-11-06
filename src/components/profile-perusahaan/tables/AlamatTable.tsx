@@ -29,7 +29,7 @@ const AlamatTable: React.FC<AlamatTableProps> = ({
     }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(2);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
 
     // Filter dan pagination logic
     const filteredData = useMemo(() => {
@@ -84,7 +84,7 @@ const AlamatTable: React.FC<AlamatTableProps> = ({
                     <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                    <SelectItem value="2">2</SelectItem>
+                    <SelectItem value="5">5</SelectItem>
                     <SelectItem value="10">10</SelectItem>
                     <SelectItem value="15">15</SelectItem>
                     <SelectItem value="20">20</SelectItem>

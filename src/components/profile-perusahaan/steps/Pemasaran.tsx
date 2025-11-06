@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import DetailPerusahaanForm from "../forms/DetailPerusahaanForm";
 
 interface PemasaranStepProps {
   data: WizardData;
@@ -19,20 +20,12 @@ const PemasaranStep: React.FC<PemasaranStepProps> = ({ data, setData }) => {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Strategi Pemasaran</CardTitle>
-          <CardDescription>
-            Tambahkan informasi tentang strategi dan aktivitas pemasaran
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Pemasaran - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk pemasaran akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        <DetailPerusahaanForm 
+          formData={data} 
+          setFormData={setData} 
+        />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WizardData } from '@/types/wizard';
+import RepresentatifTable from '../tables/RepresentatifTable';
 
 interface RepresentatifStepProps {
   data: WizardData;
@@ -8,6 +8,23 @@ interface RepresentatifStepProps {
 }
 
 const RepresentatifStep: React.FC<RepresentatifStepProps> = ({ data, setData }) => {
+
+  // Handler functions for Representatif
+  const handleEditRepresentatif = (id: number) => {
+    console.log('Edit representatif dengan ID:', id);
+  };
+
+  const handleDeleteRepresentatif = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      representatifData: prev.representatifData.filter(item => item.id !== id)
+    }));
+  };
+
+  const handleAddRepresentatif = () => {
+    console.log('Add new representatif');
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -19,20 +36,15 @@ const RepresentatifStep: React.FC<RepresentatifStepProps> = ({ data, setData }) 
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Perusahaan Representatif</CardTitle>
-          <CardDescription>
-            Tambahkan informasi tentang cabang dan perwakilan perusahaan
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-12 text-gray-500">
-            <p>Data Representatif - Coming Soon</p>
-            <p className="text-sm mt-2">Form untuk representatif akan ditambahkan di sini</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-8">
+        {/* Representatif Table */}
+        <RepresentatifTable
+          data={data.representatifData}
+          onEdit={handleEditRepresentatif}
+          onDelete={handleDeleteRepresentatif}
+          onAdd={handleAddRepresentatif}
+        />
+      </div>
     </div>
   );
 };

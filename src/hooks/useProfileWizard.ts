@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { WizardData, WizardStep } from "@/types/wizard";
+import { DEFAULT_WIZARD_DATA } from "@/data/defaultWizardData";
 
 const INITIAL_STEPS: WizardStep[] = [
   {
@@ -111,11 +112,50 @@ const INITIAL_WIZARD_DATA: WizardData = {
   kategoriProduk: [],
   industri: [],
   kataKunci: "",
-  alamatData: [],
-  picData: [],
+
+  // Use default data from external file
+  alamatData: DEFAULT_WIZARD_DATA.alamatData,
+  picData: DEFAULT_WIZARD_DATA.picData,
+
   // Step 2 - Organisasi
+  komisarisData: DEFAULT_WIZARD_DATA.komisarisData,
+  direksiData: DEFAULT_WIZARD_DATA.direksiData,
+  pemegangSahamData: DEFAULT_WIZARD_DATA.pemegangSahamData,
+
+  // Step 3 - Bank
+  bankData: DEFAULT_WIZARD_DATA.bankData,
+
+  // Step 4 - Bidang Usaha
+  bidangUsahaData: DEFAULT_WIZARD_DATA.bidangUsahaData,
+
+  // Step 6 - Tenaga Ahli
+  tenagaAhliData: DEFAULT_WIZARD_DATA.tenagaAhliData,
+  peralatanData: DEFAULT_WIZARD_DATA.peralatanData,
+
+  // Step 7 - Pengalaman
+  pengalamanData: DEFAULT_WIZARD_DATA.pengalamanData,
+
+  // Step 8 - Mitra Kerja
+  mitraKerjaData: DEFAULT_WIZARD_DATA.mitraKerjaData,
+
+  // Step 9 - Laporan Keuangan
+  laporanKeuanganData: DEFAULT_WIZARD_DATA.laporanKeuanganData,
+
+  // Step 10 - Detail Perusahaan (Pemasaran)
+  logo: "",
+  banner: "",
+  deskripsi: "",
+  facebook: "",
+  linkedIn: "",
+  instagram: "",
+  twitter: "",
+  profilPerusahaan: "",
+
+  // Step 11 - Representatif
+  representatifData: DEFAULT_WIZARD_DATA.representatifData,
+
+  // Other steps
   strukturOrganisasi: [],
-  // Step 3 - Dokumen
   dokumenData: [],
 };
 
