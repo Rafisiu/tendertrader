@@ -205,9 +205,9 @@ const Index = () => {
           
           {/* Minimal decorative elements */}
           <div className="hidden md:block absolute left-10 top-1/4">
-            <div className="w-1 h-16 bg-accent rounded-full"></div>
-            <div className="w-1 h-8 bg-accent/50 rounded-full mt-2"></div>
-            <div className="w-1 h-4 bg-accent/30 rounded-full mt-2"></div>
+            <div className="w-1 h-16 bg-[#453206] rounded-full"></div>
+            <div className="w-1 h-8 bg-[#946b0c] rounded-full mt-2"></div>
+            <div className="w-1 h-4 bg-[#c58e10] rounded-full mt-2"></div>
           </div>
           
           <div className="hidden md:block absolute right-10 top-1/3">

@@ -8,15 +8,15 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-bold mb-4">TenderTrader</h3>
+            <h3 className="text-lg font-bold mb-4 text-[#c38e13]">PT. Bank Pembangunan Daerah Sulawesi Tenggara</h3>
             <p className="text-business-100 text-sm">
-              The leading B2B marketplace for raw material tenders and procurement.
-              Connect with verified suppliers and buyers across industries.
+              Bank Sultra berizin dan diawasi oleh Otoritas Jasa Keuangan (OJK) & Bank Indonesia (BI).
+              Bank Sultra merupakan peserta program Penjaminan Lembaga Penjaminan Simpanan (LPS).
             </p>
           </div>
           
           <div>
-            <h4 className="text-md font-semibold mb-4">For Buyers</h4>
+            <h4 className="text-md font-semibold mb-4 text-[#c38e13]">For Buyers</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/buyer" className="text-business-200 hover:text-white">Buyer Portal</Link></li>
               <li><Link to="/post-tender" className="text-business-200 hover:text-white">Post a Tender</Link></li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-md font-semibold mb-4">For Sellers</h4>
+            <h4 className="text-md font-semibold mb-4 text-[#c38e13]">For Sellers</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/seller" className="text-business-200 hover:text-white">Seller Portal</Link></li>
               <li><Link to="/tenders" className="text-business-200 hover:text-white">Browse Tenders</Link></li>
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-md font-semibold mb-4">Contact & Support</h4>
+            <h4 className="text-md font-semibold mb-4 text-[#c38e13]">Contact & Support</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/contact" className="text-business-200 hover:text-white">Contact Us</Link></li>
               <li><Link to="/support" className="text-business-200 hover:text-white">Support Center</Link></li>
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-10 pt-6 border-t border-business-700 text-center text-sm text-business-300">
-          <p>© 2023 TenderTrader. All rights reserved.</p>
+          <p>© 2025 PT. Bank Pembangunan Daerah Sulawesi Tenggara | All Rights Reserved.</p>
         </div>
       </div>
     </footer>

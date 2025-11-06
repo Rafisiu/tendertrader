@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Checkbox } from '@/components/ui/checkbox';
 import { LogIn, User, Mail, Lock, Eye, EyeOff, ArrowRight, Github, Twitter } from 'lucide-react';
+import logoBlue from "@/assets/logo_banksultra_blue.png";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +31,11 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-b from-background to-muted/30">
       <div className="animate-fade-in w-full max-w-md">
         <Link to="/" className="flex justify-center mb-8">
-          <span className="text-2xl font-bold text-primary">TenderTrader</span>
+          <img 
+            src={logoBlue} 
+            alt="TenderTrader Logo" 
+            className="h-8 w-auto"
+          />
         </Link>
         
         <Card className="shadow-lg border-t-4 border-t-accent">

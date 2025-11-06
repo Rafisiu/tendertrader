@@ -18,6 +18,7 @@ import {
   User,
   X
 } from 'lucide-react';
+import logoBlue from "@/assets/logo_banksultra_blue.png";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-primary">TenderTrader</span>
+              <img src={logoBlue} alt="TenderTrader Logo" className="h-8 w-auto" />
             </Link>
             
             <nav className="hidden md:flex items-center space-x-1">
@@ -62,7 +63,10 @@ const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              
+
+              <Link to="/profile-perusahaan" className="px-3 py-2 text-foreground/80 hover:text-foreground transition-colors">
+                Profile Perusahaan
+              </Link>
               <Link to="/tenders" className="px-3 py-2 text-foreground/80 hover:text-foreground transition-colors">
                 Active Tenders
               </Link>

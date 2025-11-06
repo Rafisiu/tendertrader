@@ -20,6 +20,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import ProfilePerusahaan from '@/pages/ProfilePerusahaan';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/profile-perusahaan" element={<ProfilePerusahaan />} />
 
             {/* Protected general routes */}
             <Route element={<ProtectedRoute />}>
